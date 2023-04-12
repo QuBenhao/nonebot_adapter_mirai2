@@ -26,7 +26,7 @@ class MessageType(str, Enum):
     POKE = 'Poke'
     MARKET_FACE = 'MarketFace'
     MUSIC_SHARE = 'MusicShare'
-    FORWARD_MESSAGE = 'ForwardMessage'
+    FORWARD = 'Forward'
     FILE = 'File'
     MIRAI_CODE = 'MiraiCode'
 
@@ -330,7 +330,7 @@ class MessageSegment(BaseMessageSegment["MessageChain"]):
         return cls(type=MessageType.MUSIC_SHARE, kind=kind, title=title, summary=summary, jumpUrl=jump_url, pictureUrl=picture_url, musicUrl=music_url, brief=brief)
 
     @classmethod
-    def forward_message(cls, node_list: str, senderld: int, time: int, sender_name: str, message_chain: "MessageChain", messageid: int):
+    def forward(cls, node_list: dict, senderld: int, time: int, sender_name: str, message_chain: "MessageChain", messageid: int):
         """
         :说明:
 
@@ -338,14 +338,14 @@ class MessageSegment(BaseMessageSegment["MessageChain"]):
 
         :参数:
 
-          * ``node_list: str``: 节点列表
+          * ``node_list: dict``: 节点列表
           * ``senderld: int``: 发送者的ld
           * ``time: int``: 时间戳
           * ``sender_name: str``: 发送者的名字
           * ``message_chain: MessageChain``: 消息链
           * ``messageid: int``: 消息id
         """
-        return cls(type=MessageType.FORWARD_MESSAGE, nodeList=node_list, senderLd=senderld, time=time, senderName=sender_name, messageChain=message_chain, messageId=messageid)
+        return cls(type=MessageType.FORWARD, nodeList=node_list, senderLd=senderld, time=time, senderName=sender_name, messageChain=message_chain, messageId=messageid)
 
     @classmethod
     def file(cls, id: str, name: str, size: int):
